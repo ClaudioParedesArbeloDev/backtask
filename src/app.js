@@ -8,7 +8,7 @@ import swaggerSpec from '../swagger/swagger.js';
 
 dotenv.config();
 
-const URL = process.env.URL;
+
 
 const app = express();
 
@@ -20,6 +20,7 @@ app.use(cors());
 
 app.use('/api/tasks',tasksController)
 
+ const URL="mongodb+srv://claudioparedes:Cabeza2$@cluster1.rimje8x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1"
 
 mongoose.connect(URL, {
   dbName: 'task',
