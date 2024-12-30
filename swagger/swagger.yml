@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: Task API
+  description: API para la gestión de tareas.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080/api'
+paths:
+  /tasks:
+    get:
+      summary: Obtiene todas las tareas
+      parameters:
+        - in: query
+          title: status
+          required: false
+          schema:
+            type: string
+            enum: [true, false]
+          description: Filtra tareas por estado (completadas o pendientes)
+      responses:
+        '200':
+          description: Lista de tareas obtenidas con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '500':
+          description: Error interno del servidor
+          
+    post:
+      summary: Crea una nueva tarea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Tarea creada con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Error de validación de datos
+        '500':
+          description: Error interno del servidor
+          
+  /tasks/{id}:
+    get:
+      summary: Obtiene una tarea por su ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID de la tarea a obtener
+      responses:
+        '200':
+          description: Tarea obtenida con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Tarea no encontrada
+        '500':
+          description: Error interno del servidor
+          
+    put:
+      summary: Actualiza una tarea existente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID de la tarea a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '200':
+          description: Tarea actualizada con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Error de validación de datos
+        '404':
+          description: Tarea no encontrada
+        '500':
+          description: Error interno del servidor
+          
+    delete:
+      summary: Elimina una tarea por su ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID de la tarea a eliminar
+      responses:
+        '200':
+          description: Tarea eliminada con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Tarea no encontrada
+        '500':
+          description: Error interno del servidor
+          
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        _id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+       
+      required:
+        - title
+        - description
+        
+    TaskInput:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - title
+        - description
