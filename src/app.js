@@ -14,9 +14,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://front-react-74n13t5uq-claudio-paredes-projects.vercel.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true, 
+  origin: 'https://front-react-nu.vercel.app/', credentials: true, 
 }));
 
 app.use('/api/tasks',tasksController)
