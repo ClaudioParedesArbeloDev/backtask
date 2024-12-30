@@ -1,12 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import tasksController from './controllers/tasks.controllers.js';
-import dotenv from 'dotenv';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import swaggerSpec from '../swagger/swagger.js';
-
-dotenv.config();
 
 
 
@@ -20,14 +17,14 @@ app.use(cors());
 
 app.use('/api/tasks',tasksController)
 
- const URL="mongodb+srv://claudioparedes:Cabeza2$@cluster1.rimje8x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1"
+const URL="mongodb+srv://claudioparedes:Cabeza2$@cluster1.rimje8x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1"
 
 mongoose.connect(URL, {
   dbName: 'task',
 })
 .then(() => {
   console.log('Connected to MongoDB');
-  app.listen(8080 || 3000)
+  app.listen(8080)
 })
 .catch((error) => {
   console.log("Error connecting to MongoDB", error);
