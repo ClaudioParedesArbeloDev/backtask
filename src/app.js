@@ -14,7 +14,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://front-react-74n13t5uq-claudio-paredes-projects.vercel.app/'  // Aquí puedes especificar el dominio de tu frontend en producción
+  origin: 'https://front-react-74n13t5uq-claudio-paredes-projects.vercel.app'  
 }));
 
 app.use('/api/tasks',tasksController)
