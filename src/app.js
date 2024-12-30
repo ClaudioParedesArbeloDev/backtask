@@ -26,7 +26,7 @@ mongoose.connect(URL, {
 })
 .then(() => {
   console.log('Connected to MongoDB');
-  app.listen(8080)
+  app.listen(8080 || 3000)
 })
 .catch((error) => {
   console.log("Error connecting to MongoDB", error);
